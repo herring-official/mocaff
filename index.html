@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOCAFF | OFFICIAL</title>
     <style>
-        /* 1. 기본 설정: 스크롤 허용으로 변경 */
+        /* 1. 기본 설정: 스크롤 허용, 깔끔한 블랙 배경 */
         body, html { margin: 0; padding: 0; width: 100%; background: #000; color: #fff; font-family: 'Apple SD Gothic Neo', sans-serif; overflow-x: hidden; }
         
-        /* 전체 컨테이너 여백 확보 */
         .wrapper { 
             display: flex; flex-direction: column; align-items: center; 
             padding: 60px 20px; box-sizing: border-box; min-height: 100vh;
@@ -20,7 +19,10 @@
         .txt1 { font-size: 1rem; opacity: 0.8; margin-bottom: 5px; line-height: 1.4; }
         .txt2 { font-size: 1.2rem; color: #d4af37; font-weight: 600; letter-spacing: -0.5px; }
         
-        /* 3. 쇼케이스 (PC는 좌우, 모바일은 상하 자동 전환) */
+        /* [핵심 수정 1] "3월 25일" 문구와 아래 뱃지 사이의 간격을 대폭 확대 */
+        .txt2 { margin-bottom: 40px !important; }
+
+        /* 3. 쇼케이스 (모바일: 상하, PC: 좌우 자동 전환) */
         .showcase { 
             display: flex; flex-wrap: wrap; 
             gap: 60px; width: 100%; max-width: 1000px; 
@@ -29,13 +31,10 @@
         
         .card { flex: 1; min-width: 320px; max-width: 450px; text-align: center; }
         
-        /* 4. 가로가 긴 직사각형 카드 (이미지 잘림 절대 방지) */
+        /* 가로가 긴 카드 비율 (이미지 잘림 방지) */
         .media-box { 
             width: 100%; aspect-ratio: 1.6 / 1; 
-            border-radius: 20px; 
-            object-fit: contain; /* 뱃지 전체 노출 */
-            background: #080808; 
-            padding: 15px;
+            border-radius: 20px; object-fit: contain; background: #080808; padding: 15px;
             border: 1.5px solid rgba(212,175,55,0.4); 
             box-shadow: 0 0 30px rgba(212,175,55,0.2);
             box-sizing: border-box; display: block;
@@ -47,19 +46,22 @@
             border: 1.5px solid #d4af37; color: #d4af37; text-decoration: none; 
             border-radius: 50px; font-size: 0.9rem; font-weight: 600; transition: 0.3s;
         }
-        .btn:hover { background: #d4af37; color: #000; }
         
-        /* 5. 푸터 */
+        /* 4. 푸터 섹션 */
         .footer { margin-top: 80px; font-size: 0.8rem; color: #555; text-align: center; line-height: 1.8; padding-bottom: 40px; }
 
-        /* 모바일 대응: 화면 너비가 좁아지면 간격 조정 */
+        /* [핵심 수정 2] "OWN THE VALUE" 버튼과 이메일 주소 사이의 간격을 확대 */
+        .footer { padding-top: 30px !important; }
+
+        /* 모바일 대응 */
         @media (max-width: 768px) {
             .wrapper { padding: 40px 15px; }
             .showcase { gap: 50px; }
             .logo { font-size: 1.7rem; }
             .txt1 { font-size: 0.9rem; }
             .txt2 { font-size: 1.1rem; }
-            .card { min-width: 100%; } /* 모바일에서 카드를 꽉 차게 */
+            .txt2 { margin-bottom: 30px !important; } /* 모바일에서 숨통 트는 간격 */
+            .footer { padding-top: 25px !important; margin-top: 60px; } /* 모바일 버튼 아래 간격 */
         }
     </style>
 </head>
@@ -73,9 +75,7 @@
 
         <div class="showcase">
             <div class="card">
-                <video class="media-box" autoplay muted loop playsinline>
-                    <source src="mocaff_badge.mp4" type="video/mp4">
-                </video>
+                <video class="media-box" autoplay muted loop playsinline><source src="mocaff_badge.mp4" type="video/mp4"></video>
                 <div class="cap">MOCAFF VVIP BADGE</div>
             </div>
             
@@ -87,8 +87,7 @@
         </div>
 
         <div class="footer">
-            herring@mocaff.kr<br>
-            서울특별시 마포구 서강로 75-16 로비층 HERRING
+            herring@mocaff.kr<br>서울특별시 마포구 서강로 75-16 로비층 HERRING
         </div>
     </div>
 </body>
