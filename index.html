@@ -5,101 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MOCAFF | OFFICIAL</title>
     <style>
-        /* 1. 스크롤 절대 금지 & 전체 화면 고정 */
-        html, body { 
-            margin: 0; padding: 0; width: 100%; height: 100%; 
-            overflow: hidden; background: #000; color: #fff; 
-            font-family: 'Apple SD Gothic Neo', sans-serif; 
-        }
-        
-        /* 2. 요소를 수직으로 균등하게 배치 */
-        body { 
-            display: flex; flex-direction: column; 
-            align-items: center; justify-content: center; 
-            padding: 10px; box-sizing: border-box; 
-        }
-
-        .content-wrapper { 
-            width: 100%; max-width: 900px; 
-            display: flex; flex-direction: column; align-items: center; 
-        }
-        
-        /* 3. 상단 텍스트 크기 축소 (한 화면에 담기 위해) */
-        .header { margin-bottom: 20px; text-align: center; }
-        .logo { font-size: 1.5rem; letter-spacing: 8px; color: #d4af37; font-weight: bold; margin-bottom: 5px; }
-        .main-text { font-size: 0.9rem; opacity: 0.8; margin-bottom: 2px; }
-        .sub-text { font-size: 1rem; color: #d4af37; font-weight: 600; }
-        
-        /* 4. [핵심] 좌우 배치 (모바일은 상하) */
-        .showcase { 
-            display: flex; flex-direction: row; gap: 20px; 
-            width: 100%; justify-content: center; align-items: flex-start;
-        }
-        
-        .card { flex: 1; max-width: 400px; text-align: center; }
-        
-        /* 5. 둥근 원형(50%)을 버리고 "직사각형(20px)"으로 강제 설정 */
-        .media-box { 
-            width: 100%; 
-            aspect-ratio: 1.6 / 1; /* 가로가 긴 카드 비율 */
-            border-radius: 20px !important; /* 원형 탈출! */
-            object-fit: cover; 
-            border: 1.5px solid rgba(212,175,55,0.3);
-            box-shadow: 0 0 20px rgba(212,175,55,0.2);
-            display: block;
-        }
-        
-        .caption { font-size: 0.85rem; margin-top: 10px; font-weight: 500; }
-        
-        .opensea-btn { 
-            display: inline-block; margin-top: 15px; 
-            padding: 10px 25px; border: 1px solid #d4af37; 
-            color: #d4af37; text-decoration: none; border-radius: 50px; 
-            font-size: 0.8rem; font-weight: 600; 
-        }
-
-        /* 6. 푸터 */
-        .footer { 
-            margin-top: 30px; font-size: 0.7rem; color: #444; 
-            text-align: center; line-height: 1.5; 
-        }
-
-        /* 7. 모바일 대응 (한 화면에 다 넣기 위해 크기 조절) */
-        @media (max-width: 768px) {
-            .showcase { flex-direction: column; align-items: center; gap: 15px; }
-            .card { width: 90%; }
-            .logo { font-size: 1.3rem; }
-            .media-box { aspect-ratio: 1.8 / 1; } /* 모바일에서 더 슬림하게 */
-        }
+        html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; color: #fff; font-family: sans-serif; }
+        body { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; box-sizing: border-box; }
+        .wrapper { width: 100%; max-width: 800px; display: flex; flex-direction: column; align-items: center; }
+        .header { text-align: center; margin-bottom: 15px; }
+        .logo { font-size: 1.4rem; letter-spacing: 8px; color: #d4af37; font-weight: bold; margin-bottom: 5px; }
+        .txt1 { font-size: 0.85rem; opacity: 0.8; margin-bottom: 2px; }
+        .txt2 { font-size: 0.95rem; color: #d4af37; font-weight: 600; }
+        .showcase { display: flex; flex-direction: row; gap: 15px; width: 100%; justify-content: center; }
+        .card { flex: 1; max-width: 350px; text-align: center; }
+        .media { width: 100%; aspect-ratio: 1.6 / 1; border-radius: 15px !important; object-fit: cover; border: 1.5px solid rgba(212,175,55,0.3); box-shadow: 0 0 15px rgba(212,175,55,0.2); }
+        .cap { font-size: 0.75rem; margin-top: 8px; opacity: 0.9; }
+        .btn { display: inline-block; margin-top: 12px; padding: 8px 20px; border: 1px solid #d4af37; color: #d4af37; text-decoration: none; border-radius: 50px; font-size: 0.75rem; font-weight: 600; }
+        .footer { margin-top: 25px; font-size: 0.65rem; color: #444; text-align: center; line-height: 1.4; }
+        @media (max-width: 600px) { .showcase { flex-direction: column; align-items: center; gap: 10px; } .card { width: 85%; } .media { aspect-ratio: 1.8 / 1; } }
     </style>
 </head>
 <body>
-    <div class="content-wrapper">
+    <div class="wrapper">
         <div class="header">
             <div class="logo">MOCAFF</div>
-            <div class="main-text">커피 생태계의 진정한 가치를 연결합니다.</div>
-            <div class="sub-text">3월 25일, 그 가치를 경험하세요.</div>
+            <div class="txt1">커피 생태계의 진정한 가치를 연결합니다.</div>
+            <div class="txt2">3월 25일, 그 가치를 경험하세요.</div>
         </div>
-
         <div class="showcase">
             <div class="card">
-                <video class="media-box" autoplay muted loop playsinline>
-                    <source src="mocaff_badge.mp4" type="video/mp4">
-                </video>
-                <div class="caption">MOCAFF VVIP BADGE</div>
+                <video class="media" autoplay muted loop playsinline><source src="mocaff_badge.mp4" type="video/mp4"></video>
+                <div class="cap">MOCAFF VVIP BADGE</div>
             </div>
-            
             <div class="card">
-                <img src="nft_badge.jpg" alt="NFT" class="media-box" style="border-color: rgba(255,182,193,0.3);">
-                <div class="caption">SPRING COFFEE CONCERT</div>
-                <a href="https://opensea.io/assets/polygon/0x0172a6ace69916736e395c750fccce5305e726ac/0" target="_blank" class="opensea-btn">OWN THE VALUE</a>
+                <img src="nft_badge.jpg" class="media" style="border-color: rgba(255,182,193,0.3);">
+                <div class="cap">SPRING COFFEE CONCERT</div>
+                <a href="https://opensea.io/assets/polygon/0x0172a6ace69916736e395c750fccce5305e726ac/0" target="_blank" class="btn">OWN THE VALUE</a>
             </div>
         </div>
-
-        <div class="footer">
-            herring@mocaff.kr<br>
-            서울특별시 마포구 서강로 75-16 로비층 HERRING
-        </div>
+        <div class="footer">herring@mocaff.kr<br>서울특별시 마포구 서강로 75-16 로비층 HERRING</div>
     </div>
 </body>
 </html>
