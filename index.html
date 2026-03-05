@@ -8,18 +8,17 @@
         body { margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #000; font-family: 'Apple SD Gothic Neo', sans-serif; color: #fff; overflow: hidden; }
         .container { text-align: center; width: 100%; max-width: 500px; padding: 20px; }
         .logo { font-size: 2rem; font-weight: bold; color: #d4af37; letter-spacing: 8px; margin-bottom: 30px; }
-        .video-container { width: 100%; border-radius: 20px; overflow: hidden; box-shadow: 0 0 50px rgba(212, 175, 55, 0.3); margin-bottom: 30px; }
-        video { width: 100%; display: block; }
+        .video-container { width: 100%; border-radius: 20px; overflow: hidden; box-shadow: 0 0 50px rgba(212, 175, 55, 0.3); margin-bottom: 30px; background: #000; }
+        video { width: 100%; display: block; outline: none; border: none; }
         h1 { font-weight: 300; font-size: 1.2rem; line-height: 1.8; color: #ccc; }
         .btn { display: inline-block; margin-top: 30px; padding: 15px 40px; border: 1px solid #d4af37; color: #d4af37; text-decoration: none; border-radius: 50px; font-size: 0.9rem; transition: 0.3s; }
-        .btn:hover { background: #d4af37; color: #000; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="logo">MOCAFF</div>
         <div class="video-container">
-            <video autoplay muted loop playsinline>
+            <video preload="auto" autoplay muted loop playsinline>
                 <source src="mocaff_badge.mp4" type="video/mp4">
             </video>
         </div>
