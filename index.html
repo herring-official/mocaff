@@ -22,19 +22,23 @@
         .t-num { display: block; font-size: 1.3rem; color: #d4af37; font-weight: bold; }
         .t-lab { font-size: 0.6rem; color: #888; text-transform: uppercase; }
         
-        /* [캐러셀] 그리드 폭 및 오버플로우 설정 */
-        .grid { display: flex; flex-wrap: wrap; gap: 20px; width: 100%; max-width: 1000px; justify-content: center; margin-bottom: 40px; position: relative; overflow: hidden; }
+        /* [완전 개편] 슬라이드 전용 구조 */
+        .carousel-wrap { position: relative; width: 100%; max-width: 400px; margin: 0 auto 40px; overflow: hidden; border-radius: 15px; }
+        .slider-container { display: flex; transition: transform 0.4s ease-in-out; width: 100%; }
+        .slide { min-width: 100%; display: flex; justify-content: center; align-items: center; box-sizing: border-box; padding: 0 10px; }
         
-        /* [캐러셀] 슬라이더 스타일 */
-        .slider-container { display: flex; transition: transform 0.5s ease-in-out; width: 100%; height: 100%; }
-        .slide { flex: 0 0 100%; max-width: 100%; position: relative; display: flex; justify-content: center; align-items: center; }
-        
-        /* [미세 조정] 뱃지 크기 미세 축소 */
-        .card { flex: 1; min-width: 260px; max-width: 320px; text-align: center; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+        /* 뱃지 카드 디자인 */
+        .card { width: 100%; text-align: center; }
         .media { width: 100%; aspect-ratio: 16 / 10; border-radius: 15px; object-fit: contain; background: #080808; padding: 10px; border: 1.5px solid rgba(212, 175, 55, 0.4); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); box-sizing: border-box; display: block; }
         
         .btn { display: inline-block; margin-top: 15px; padding: 12px 30px; border: 1.5px solid #d4af37; color: #d4af37; text-decoration: none; border-radius: 50px; font-size: 0.85rem; font-weight: 600; }
         .btn:hover { background: #d4af37; color: #000; }
+
+        /* [개편] 금색 원형 화살표 버튼 */
+        .arrow { position: absolute; top: 40%; transform: translateY(-50%); font-size: 1.5rem; color: #000; background: rgba(212, 175, 55, 0.8); border: none; cursor: pointer; opacity: 0.8; z-index: 100; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(0,0,0,0.8); transition: all 0.2s; font-weight: bold; }
+        .arrow:hover { background: #d4af37; opacity: 1; transform: translateY(-50%) scale(1.1); }
+        .arrow.left { left: 5px; }
+        .arrow.right { right: 5px; }
 
         .info-area { width: 100%; max-width: 500px; margin-bottom: 40px; padding: 25px; background: rgba(212, 175, 55, 0.05); border-left: 3px solid #d4af37; border-radius: 0 10px 10px 0; box-sizing: border-box; }
         .info-row { display: flex; margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5; }
@@ -50,17 +54,10 @@
         .privacy input { accent-color: #d4af37; }
         .submit { width: 100%; max-width: 400px; padding: 16px; background: #d4af37; border: none; border-radius: 8px; color: #000; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
         
-        /* 깜빡이는 애니메이션 효과 추가 ( FOMO 극대화 ) */
+        /* 깜빡이는 애니메이션 효과 ( FOMO 극대화 ) */
         @keyframes blinker { 50% { opacity: 0; } }
 
-        /* [캐러셀] 화살표 스타일 */
-        .arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2rem; color: #d4af37; background: none; border: none; cursor: pointer; transition: opacity 0.3s ease; opacity: 0.6; z-index: 10; }
-        .arrow:hover { opacity: 1; }
-        .arrow.left { left: 10px; }
-        .arrow.right { right: 10px; }
-
         .footer { margin-top: 50px; font-size: 0.75rem; color: #444; text-align: center; line-height: 1.6; padding-bottom: 40px; }
-        @media (max-width: 768px) { .grid { flex-direction: column; align-items: center; } .card { width: 100%; } .f-desc { font-size: 0.85rem; } }
     </style>
 </head>
 <body>
@@ -75,7 +72,7 @@
                 </p>
                 <div style="width: 30px; height: 1.5px; background: rgba(212, 175, 55, 0.6); margin: 15px auto 0;"></div>
             </div>
-            
+
             <div id="timer">
                 <div class="t-box"><span class="t-num" id="d">00</span><span class="t-lab">Day</span></div>
                 <div class="t-box"><span class="t-num" id="h">00</span><span class="t-lab">Hrs</span></div>
@@ -85,9 +82,9 @@
             <div style="font-size: 1rem; color: #d4af37; font-weight: 600;">3월 25일, 대단원의 막이 오릅니다.</div>
         </div>
 
-        <div class="grid">
-            <button class="arrow left" id="prevBtn">&lt;</button>
-            <button class="arrow right" id="nextBtn">&gt;</button>
+        <div class="carousel-wrap">
+            <button class="arrow left" onclick="moveSlide(-1)">&lt;</button>
+            <button class="arrow right" onclick="moveSlide(1)">&gt;</button>
 
             <div class="slider-container" id="slider">
                 
@@ -150,5 +147,27 @@
     </div>
 
     <script>
-        const slider = document.getElementById('slider');
-        const
+        let currentSlide = 0;
+        const totalSlides = 3;
+
+        function moveSlide(direction) {
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            document.getElementById('slider').style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+    </script>
+
+    <script>
+        function update() {
+            const target = new Date("March 25, 2026 00:00:00").getTime();
+            const now = new Date().getTime();
+            const diff = target - now;
+            if (diff <= 0) { document.getElementById("timer").innerHTML = "D-DAY"; return; }
+            document.getElementById("d").innerText = Math.floor(diff/(1000*60*60*24)).toString().padStart(2,'0');
+            document.getElementById("h").innerText = Math.floor((diff%(1000*60*60*24))/(1000*60*60)).toString().padStart(2,'0');
+            document.getElementById("m").innerText = Math.floor((diff%(1000*60*60))/(1000*60)).toString().padStart(2,'0');
+            document.getElementById("s").innerText = Math.floor((diff%(1000*60))/1000).toString().padStart(2,'0');
+        }
+        setInterval(update, 1000); update();
+    </script>
+</body>
+</html>
