@@ -5,25 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MOCAFF | 2026 헤링 봄 음악회 신청</title>
     <style>
-        /* 모든 식별자를 Z-로 변경하여 브라우저의 캐시 기억을 강제로 초기화 */
         body, html { margin: 0; padding: 0; width: 100%; background: #000; color: #fff; font-family: -apple-system, sans-serif; overflow-x: hidden; }
-        .Z-container { display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box; min-height: 100vh; }
-        .Z-header { text-align: center; margin-bottom: 30px; width: 100%; }
-        .Z-logo { font-size: 1.8rem; letter-spacing: 10px; color: #d4af37; font-weight: bold; margin-bottom: 15px; }
-        #Z-timer { display: flex; justify-content: center; gap: 8px; margin: 20px 0; }
-        .Z-t-box { background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); padding: 10px; border-radius: 10px; min-width: 55px; text-align: center; }
-        .Z-t-num { display: block; font-size: 1.3rem; color: #d4af37; font-weight: bold; }
-        .Z-t-lab { font-size: 0.6rem; color: #888; text-transform: uppercase; }
+        .wrapper { display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box; min-height: 100vh; }
+        .header { text-align: center; margin-bottom: 30px; width: 100%; }
+        .logo { font-size: 1.8rem; letter-spacing: 10px; color: #d4af37; font-weight: bold; margin-bottom: 15px; }
+        #timer { display: flex; justify-content: center; gap: 8px; margin: 20px 0; }
+        .t-box { background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); padding: 10px; border-radius: 10px; min-width: 55px; text-align: center; }
+        .t-num { display: block; font-size: 1.3rem; color: #d4af37; font-weight: bold; }
+        .t-lab { font-size: 0.6rem; color: #888; text-transform: uppercase; }
         
-        .Z-grid { display: flex; flex-wrap: wrap; gap: 40px; width: 100%; max-width: 900px; justify-content: center; margin-bottom: 30px; }
-        .Z-card { flex: 1; min-width: 280px; max-width: 420px; text-align: center; }
-        .Z-media { width: 100%; aspect-ratio: 16 / 10; border-radius: 15px; object-fit: contain; background: #080808; padding: 10px; border: 1.5px solid rgba(212, 175, 55, 0.4); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); box-sizing: border-box; display: block; }
-        .Z-cap { font-size: 0.95rem; margin-top: 15px; color: #d4af37; font-weight: bold; letter-spacing: 0.5px; }
+        .grid { display: flex; flex-wrap: wrap; gap: 40px; width: 100%; max-width: 900px; justify-content: center; margin-bottom: 30px; }
+        .card { flex: 1; min-width: 280px; max-width: 420px; text-align: center; }
+        .media { width: 100%; aspect-ratio: 16 / 10; border-radius: 15px; object-fit: contain; background: #080808; padding: 10px; border: 1.5px solid rgba(212, 175, 55, 0.4); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); box-sizing: border-box; display: block; }
+        .cap { font-size: 0.95rem; margin-top: 15px; color: #d4af37; font-weight: bold; }
         
-        /* 통합 버튼 영역 */
-        .Z-btn-area { width: 100%; text-align: center; margin-bottom: 50px; padding: 0 10px; box-sizing: border-box; }
-        .Z-btn-link { display: inline-block; padding: 16px 30px; border: 1.5px solid #d4af37; color: #d4af37; text-decoration: none; border-radius: 50px; font-size: 0.9rem; font-weight: 700; transition: 0.3s; background: rgba(212, 175, 55, 0.05); line-height: 1.4; }
-        .Z-btn-link:hover { background: #d4af37; color: #000; box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
+        .btn-area { width: 100%; text-align: center; margin-bottom: 50px; }
+        .btn { display: inline-block; padding: 15px 35px; border: 1.5px solid #d4af37; color: #d4af37; text-decoration: none; border-radius: 50px; font-size: 0.9rem; font-weight: 700; transition: 0.3s; background: rgba(212, 175, 55, 0.05); }
+        .btn:hover { background: #d4af37; color: #000; }
 
-        .Z-form-box { width: 100%; max-width: 500px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 20px; padding: 35px 15px; text-align: center; box-sizing: border-box; }
-        .Z-f-title { font-size: 1.4rem; color: #d4af37; margin-bottom: 15px; font
+        .form-area { width: 100%; max-width: 500px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 20px; padding: 35px 15px; text-align: center; box-sizing: border-box; }
+        .f-title { font-size: 1.4rem; color: #d4af37; margin-bottom: 15px; font-weight: bold; }
+        .f-desc { font-size: 0.88rem; color: #ccc; margin-bottom: 25px; line-height: 1.6; word-break: keep-all; }
+        .input { width: 100%; max-width: 400px; padding: 14px; background: #111; border: 1px solid #333; border-radius: 8px; color: #fff; margin-bottom: 12px; box-sizing: border-box; font-size: 1rem; }
+        .privacy { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom:
