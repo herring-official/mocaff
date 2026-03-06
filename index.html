@@ -5,45 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MOCAFF | 2026 헤링 봄 음악회 신청</title>
     <style>
+        /* 모든 식별자를 Z-로 변경하여 브라우저의 캐시 기억을 강제로 초기화 */
         body, html { margin: 0; padding: 0; width: 100%; background: #000; color: #fff; font-family: -apple-system, sans-serif; overflow-x: hidden; }
-        .H-wrap { display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box; min-height: 100vh; }
-        .H-header { text-align: center; margin-bottom: 30px; width: 100%; }
-        .H-logo { font-size: 1.8rem; letter-spacing: 10px; color: #d4af37; font-weight: bold; margin-bottom: 15px; }
-        #H-timer { display: flex; justify-content: center; gap: 8px; margin: 20px 0; }
-        .H-t-box { background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); padding: 10px; border-radius: 10px; min-width: 55px; text-align: center; }
-        .H-t-num { display: block; font-size: 1.3rem; color: #d4af37; font-weight: bold; }
-        .H-t-lab { font-size: 0.6rem; color: #888; text-transform: uppercase; }
+        .Z-container { display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box; min-height: 100vh; }
+        .Z-header { text-align: center; margin-bottom: 30px; width: 100%; }
+        .Z-logo { font-size: 1.8rem; letter-spacing: 10px; color: #d4af37; font-weight: bold; margin-bottom: 15px; }
+        #Z-timer { display: flex; justify-content: center; gap: 8px; margin: 20px 0; }
+        .Z-t-box { background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); padding: 10px; border-radius: 10px; min-width: 55px; text-align: center; }
+        .Z-t-num { display: block; font-size: 1.3rem; color: #d4af37; font-weight: bold; }
+        .Z-t-lab { font-size: 0.6rem; color: #888; text-transform: uppercase; }
         
-        .H-grid { display: flex; flex-wrap: wrap; gap: 40px; width: 100%; max-width: 900px; justify-content: center; margin-bottom: 30px; }
-        .H-card { flex: 1; min-width: 280px; max-width: 420px; text-align: center; }
-        .H-media { width: 100%; aspect-ratio: 16 / 10; border-radius: 15px; object-fit: contain; background: #080808; padding: 10px; border: 1.5px solid rgba(212, 175, 55, 0.4); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); box-sizing: border-box; display: block; }
+        .Z-grid { display: flex; flex-wrap: wrap; gap: 40px; width: 100%; max-width: 900px; justify-content: center; margin-bottom: 30px; }
+        .Z-card { flex: 1; min-width: 280px; max-width: 420px; text-align: center; }
+        .Z-media { width: 100%; aspect-ratio: 16 / 10; border-radius: 15px; object-fit: contain; background: #080808; padding: 10px; border: 1.5px solid rgba(212, 175, 55, 0.4); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); box-sizing: border-box; display: block; }
+        .Z-cap { font-size: 0.95rem; margin-top: 15px; color: #d4af37; font-weight: bold; letter-spacing: 0.5px; }
         
-        .H-cap { font-size: 0.95rem; margin-top: 15px; color: #d4af37; font-weight: bold; letter-spacing: 0.5px; }
-        
-        /* [핵심 수정] 통합 버튼 스타일 */
-        .H-btn-wrap { width: 100%; text-align: center; margin-bottom: 50px; }
-        .H-btn { display: inline-block; padding: 14px 40px; border: 1.5px solid #d4af37; color: #d4af37; text-decoration: none; border-radius: 50px; font-size: 0.9rem; font-weight: 700; transition: 0.3s; background: rgba(212, 175, 55, 0.05); }
-        .H-btn:hover { background: #d4af37; color: #000; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+        /* 통합 버튼 영역 */
+        .Z-btn-area { width: 100%; text-align: center; margin-bottom: 50px; padding: 0 10px; box-sizing: border-box; }
+        .Z-btn-link { display: inline-block; padding: 16px 30px; border: 1.5px solid #d4af37; color: #d4af37; text-decoration: none; border-radius: 50px; font-size: 0.9rem; font-weight: 700; transition: 0.3s; background: rgba(212, 175, 55, 0.05); line-height: 1.4; }
+        .Z-btn-link:hover { background: #d4af37; color: #000; box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
 
-        .H-form-area { width: 100%; max-width: 500px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 20px; padding: 35px 15px; text-align: center; box-sizing: border-box; }
-        .H-f-title { font-size: 1.4rem; color: #d4af37; margin-bottom: 15px; font-weight: bold; }
-        .H-f-desc { font-size: 0.88rem; color: #ccc; margin-bottom: 25px; line-height: 1.6; word-break: keep-all; }
-        .H-input { width: 100%; max-width: 400px; padding: 14px; background: #111; border: 1px solid #333; border-radius: 8px; color: #fff; margin-bottom: 12px; box-sizing: border-box; font-size: 1rem; }
-        
-        .H-privacy { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 15px; font-size: 0.75rem; color: #888; cursor: pointer; }
-        .H-privacy input { accent-color: #d4af37; }
-
-        .H-submit { width: 100%; max-width: 400px; padding: 16px; background: #d4af37; border: none; border-radius: 8px; color: #000; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
-        .H-footer { margin-top: 50px; font-size: 0.75rem; color: #444; text-align: center; line-height: 1.6; padding-bottom: 40px; }
-        
-        @media (max-width: 768px) { .H-grid { flex-direction: column; align-items: center; } .H-card { width: 100%; } .H-f-desc { font-size: 0.82rem; } .H-btn { padding: 12px 25px; font-size: 0.85rem; } }
-    </style>
-</head>
-<body>
-    <div class="H-wrap">
-        <div class="H-header">
-            <div class="H-logo">MOCAFF</div>
-            <div id="H-timer">
-                <div class="H-t-box"><span class="H-t-num" id="d">00</span><span class="H-t-lab">Day</span></div>
-                <div class="H-t-box"><span class="H-t-num" id="h">00</span><span class="H-t-lab">Hrs</span></div>
-                <div class="H-t-box"><span class="H-t-num" id="m">00</span><span class="H-t-lab">Min</span></div>
+        .Z-form-box { width: 100%; max-width: 500px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 20px; padding: 35px 15px; text-align: center; box-sizing: border-box; }
+        .Z-f-title { font-size: 1.4rem; color: #d4af37; margin-bottom: 15px; font
