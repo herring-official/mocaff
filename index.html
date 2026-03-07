@@ -18,127 +18,102 @@
     <style>
         body, html { margin: 0; padding: 0; width: 100%; background: #000; color: #fff; font-family: -apple-system, sans-serif; overflow-x: hidden; }
         .wrapper { display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box; min-height: 100vh; }
-        .header { text-align: center; margin-bottom: 30px; width: 100%; }
-        .logo { font-size: 1.8rem; letter-spacing: 10px; color: #d4af37; font-weight: bold; margin-bottom: 10px; }
+        .logo { font-size: 1.8rem; letter-spacing: 10px; color: #d4af37; font-weight: bold; margin-bottom: 30px; }
         
-        #timer { display: flex; justify-content: center; gap: 8px; margin: 20px 0; }
-        .t-box { background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); padding: 10px; border-radius: 10px; min-width: 55px; text-align: center; }
-        .t-num { display: block; font-size: 1.3rem; color: #d4af37; font-weight: bold; }
-        .t-lab { font-size: 0.6rem; color: #888; text-transform: uppercase; }
-        
-        .carousel-wrap { position: relative; width: 100%; max-width: 480px; margin: 0 auto 40px; padding: 0 45px; box-sizing: border-box; }
-        .slider-viewport { overflow: hidden; width: 100%; }
-        .slider-container { display: flex; transition: transform 0.4s ease-in-out; width: 100%; align-items: flex-start; }
-        .slide { width: 100%; flex: 0 0 100%; box-sizing: border-box; }
-        
-        .card { width: 100%; margin: 0 auto; text-align: center; }
-        .media { width: 100%; aspect-ratio: 16 / 10; border-radius: 15px; object-fit: contain; background: #080808; padding: 10px; border: 1.5px solid rgba(212, 175, 55, 0.4); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); box-sizing: border-box; display: block; }
-        
-        .btn { display: inline-block; margin-top: 15px; padding: 12px 30px; border: 1.5px solid #d4af37; color: #d4af37; text-decoration: none; border-radius: 50px; font-size: 0.85rem; font-weight: 600; }
-        .btn:hover { background: #d4af37; color: #000; }
-
-        .arrow { position: absolute; top: 110px; transform: translateY(-50%); font-size: 1.5rem; color: #000; background: rgba(212, 175, 55, 0.9); border: none; cursor: pointer; z-index: 100; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(212,175,55,0.4); transition: all 0.2s; font-weight: bold; }
-        .arrow:hover { background: #fff; transform: translateY(-50%) scale(1.1); }
-        .arrow.left { left: 0; }
-        .arrow.right { right: 0; }
-
-        .info-area { width: 100%; max-width: 500px; margin-bottom: 40px; padding: 25px; background: rgba(212, 175, 55, 0.05); border-left: 3px solid #d4af37; border-radius: 0 10px 10px 0; box-sizing: border-box; }
-        .info-row { display: flex; margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5; }
-        .info-row:last-child { margin-bottom: 0; }
-        .info-label { color: #d4af37; font-weight: bold; width: 90px; flex-shrink: 0; }
-        .info-val { color: #ddd; word-break: keep-all; }
-
-        .form-area { width: 100%; max-width: 500px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 20px; padding: 35px 15px; text-align: center; box-sizing: border-box; }
-        .f-title { font-size: 1.4rem; color: #d4af37; margin-bottom: 15px; font-weight: bold; }
-        .f-desc { font-size: 0.88rem; color: #ccc; margin-bottom: 25px; line-height: 1.6; word-break: keep-all; }
+        /* 폼 & 티켓 영역 */
+        .stage-area { width: 100%; max-width: 500px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 20px; padding: 35px 15px; text-align: center; box-sizing: border-box; }
         .input { width: 100%; max-width: 400px; padding: 14px; background: #111; border: 1px solid #333; border-radius: 8px; color: #fff; margin-bottom: 12px; box-sizing: border-box; font-size: 1rem; }
-        .privacy { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 15px; font-size: 0.75rem; color: #888; cursor: pointer; }
-        .privacy input { accent-color: #d4af37; }
         .submit { width: 100%; max-width: 400px; padding: 16px; background: #d4af37; border: none; border-radius: 8px; color: #000; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
+        
+        /* NFT 티켓 및 USED 효과 */
+        .ticket-box { display: none; position: relative; width: 100%; max-width: 350px; margin: 0 auto; }
+        .badge-img { width: 100%; border-radius: 15px; border: 2px solid #d4af37; box-shadow: 0 0 30px rgba(212, 175, 55, 0.4); }
+        .used-stamp { display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-20deg); font-size: 4rem; color: #ff3b30; border: 8px solid #ff3b30; padding: 10px 20px; font-weight: 900; background: rgba(0,0,0,0.6); border-radius: 15px; z-index: 10; letter-spacing: 5px; }
+        
+        .burn-btn { margin-top: 25px; background: transparent; border: 1px solid #ff3b30; color: #ff3b30; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 0.85rem; }
+        .burn-btn:disabled { border-color: #444; color: #444; cursor: default; }
         
         .footer { margin-top: 50px; font-size: 0.75rem; color: #444; text-align: center; line-height: 1.6; padding-bottom: 40px; }
     </style>
 </head>
 <body>
     <div class="wrapper">
-        <div class="header">
-            <div class="logo">MOCAFF</div>
-            <div style="margin-bottom: 25px; text-align: center;">
-                <p style="font-size: 0.9rem; color: #bbb; line-height: 1.6; margin: 0; word-break: keep-all;">
-                    실재하는 가치를 디지털 자산으로 설계합니다.<br>
-                    Crypto Architect & Founder of <span style="color: #d4af37; font-weight: bold;">HERRING</span>
-                </p>
-                <div style="width: 30px; height: 1.5px; background: rgba(212, 175, 55, 0.6); margin: 15px auto 0;"></div>
-            </div>
-            <div id="timer">
-                <div class="t-box"><span class="t-num" id="d">00</span><span class="t-lab">Day</span></div>
-                <div class="t-box"><span class="t-num" id="h">00</span><span class="t-lab">Hrs</span></div>
-                <div class="t-box"><span class="t-num" id="m">00</span><span class="t-lab">Min</span></div>
-                <div class="t-box"><span class="t-num" id="s">00</span><span class="t-lab">Sec</span></div>
-            </div>
-            <div style="font-size: 1rem; color: #d4af37; font-weight: 600;">3월 25일, 대단원의 막이 오릅니다.</div>
-        </div>
+        <div class="logo">MOCAFF</div>
 
-        <div class="carousel-wrap">
-            <button class="arrow left" onclick="moveSlide(-1)">&lt;</button>
-            <button class="arrow right" onclick="moveSlide(1)">&gt;</button>
-            <div class="slider-viewport">
-                <div class="slider-container" id="slider">
-                    <div class="slide">
-                        <div class="card">
-                            <img src="nft_badge.jpg" class="media" alt="MOCAFF NFT">
-                            <div style="margin-top:10px; font-size:0.9rem; color:#d4af37; font-weight:bold;">MOCAFF SPRING CONCERT</div>
-                            <a href="https://opensea.io/assets/polygon/0x0172a6ace69916736e395c750fccce5305e726ac/0" target="_blank" class="btn">증정 NFT 혜택 확인하기</a>
-                        </div>
-                    </div>
-
-                    <div class="slide">
-                        <div class="card">
-                            <img src="collaboration_badge.jpg" class="media" alt="Collaboration Mystery Badge">
-                            <div style="font-size: 0.95rem; color: #d4af37; margin: 15px 10px 0; font-weight: 700; line-height: 1.5; word-break: keep-all;">
-                                어느 브랜드가 하이엔드 원두<br>RWA 시음회의 주인공이 될 것인가?
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="slide">
-                        <div class="card">
-                            <video class="media" autoplay muted loop playsinline poster="nft_badge.jpg"><source src="mocaff_badge.mp4" type="video/mp4"></video>
-                            <div style="margin-top:10px; font-size:0.9rem; color:#d4af37; font-weight:bold;">MOCAFF VVIP BADGE</div>
-                            <div style="font-size:0.75rem; color:#888; margin-top:5px;">멤버십 절대 증표</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="info-area">
-            <div class="info-row">
-                <div class="info-label">DATE</div>
-                <div class="info-val">2026년 3월 25일 (수) PM 7 - 8:20</div>
-            </div>
-            <div class="info-row"><div class="info-label">PLACE</div><div class="info-val">서울특별시 마포구 서강로 75-16, 로비층 HERRING</div></div>
-            <div class="info-row"><div class="info-label">BENEFIT</div><div class="info-val">커피 한 잔이 들어있는 한정판 NFT 증정</div></div>
-        </div>
-
-        <div class="form-area">
-            <div class="f-title">2026 헤링 봄 음악회 신청</div>
-            <p class="f-desc">참석을 희망하는 분의 성함과 연락처를 남겨 주시면<br>당첨 시 연락 드립니다.</p>
-            <form action="https://formspree.io/f/xkoqwjrl" method="POST">
+        <div id="registration-stage" class="stage-area">
+            <h2 style="color:#d4af37; margin-bottom:15px; font-weight:bold;">VVIP 시음권 신청</h2>
+            <p style="font-size:0.88rem; color:#ccc; margin-bottom:25px; line-height:1.6; word-break:keep-all;">참석을 희망하는 분의 정보를 입력하시면<br>현장에서 즉시 디지털 뱃지가 발급됩니다.</p>
+            <form id="mocaff-form" action="https://formspree.io/f/xkoqwjrl" method="POST">
                 <input type="text" name="성함" class="input" placeholder="성함" required>
                 <input type="tel" name="연락처" class="input" placeholder="연락처" required>
-                <label class="privacy"><input type="checkbox" name="개인정보동의" required><span>[필수] 개인정보 수집 및 이용에 동의합니다.</span></label>
-                <button type="submit" class="submit">신청하기</button>
+                <button type="submit" class="submit">NFT 발급받기</button>
             </form>
         </div>
+
+        <div id="ticket-stage" class="stage-area" style="display:none;">
+            <div class="ticket-box" id="ticket-box">
+                <div class="used-stamp" id="used-stamp">USED</div>
+                <img src="nft_badge.jpg" class="badge-img" id="nft-image">
+            </div>
+            <h3 id="ticket-user" style="margin-top:20px; color:#d4af37; font-weight:bold;"></h3>
+            <p id="ticket-msg" style="font-size:0.9rem; color:#ccc; margin-bottom:10px;">현장 스태프에게 이 화면을 보여주세요.</p>
+            <button id="burn-btn" class="burn-btn" onclick="burnProcess()">시음권 사용 (스태프 전용 확인)</button>
+        </div>
+
         <div class="footer">herring@mocaff.kr<br>서울특별시 마포구 서강로 75-16 로비층 HERRING</div>
     </div>
 
     <script>
-        let currentSlide = 0; const totalSlides = 3;
-        function moveSlide(direction) { currentSlide = (currentSlide + direction + totalSlides) % totalSlides; document.getElementById('slider').style.transform = `translateX(-${currentSlide * 100}%)`; }
-        function update() { const target = new Date("March 25, 2026 00:00:00").getTime(); const now = new Date().getTime(); const diff = target - now; if (diff <= 0) { document.getElementById("timer").innerHTML = "D-DAY"; return; } document.getElementById("d").innerText = Math.floor(diff/(1000*60*60*24)).toString().padStart(2,'0'); document.getElementById("h").innerText = Math.floor((diff%(1000*60*60*24))/(1000*60*60)).toString().padStart(2,'0'); document.getElementById("m").innerText = Math.floor((diff%(1000*60*60))/(1000*60)).toString().padStart(2,'0'); document.getElementById("s").innerText = Math.floor((diff%(1000*60))/1000).toString().padStart(2,'0'); }
-        setInterval(update, 1000); update();
+        const form = document.getElementById('mocaff-form');
+        const regStage = document.getElementById('registration-stage');
+        const ticketStage = document.getElementById('ticket-stage');
+        const burnBtn = document.getElementById('burn-btn');
+        const usedStamp = document.getElementById('used-stamp');
+        
+        // [수정 완료] 지휘관님의 새로운 비밀 코드
+        const adminCode = "0426"; 
+
+        window.onload = function() {
+            const savedUser = localStorage.getItem('mocaff_user');
+            const isUsed = localStorage.getItem('mocaff_burned');
+            if (savedUser) { showTicket(savedUser, isUsed); }
+        };
+
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            const name = form.elements['성함'].value;
+            const formData = new FormData(form);
+            fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' }});
+            localStorage.setItem('mocaff_user', name);
+            showTicket(name, false);
+        };
+
+        function showTicket(name, isUsed) {
+            regStage.style.display = 'none';
+            ticketStage.style.display = 'block';
+            document.getElementById('ticket-box').style.display = 'block';
+            document.getElementById('ticket-user').innerText = name + " 님의 VVIP 뱃지";
+            if (isUsed === 'true' || isUsed === true) { applyBurnEffect(); }
+        }
+
+        function burnProcess() {
+            const input = prompt("관리자 확인 코드를 입력하십시오.");
+            if (input === adminCode) {
+                if(confirm("시음 확인 처리를 완료할까요? 완료 후에는 복구가 불가능합니다.")) {
+                    localStorage.setItem('mocaff_burned', 'true');
+                    applyBurnEffect();
+                    alert("✅ 확인 완료. 하이엔드 원두를 서빙해 주십시오.");
+                }
+            } else { alert("❌ 코드가 올바르지 않습니다."); }
+        }
+
+        function applyBurnEffect() {
+            usedStamp.style.display = 'block';
+            burnBtn.disabled = true;
+            burnBtn.innerText = "사용 완료된 시음권";
+            document.getElementById('ticket-msg').innerText = "이미 시음이 완료된 뱃지입니다.";
+            document.getElementById('ticket-msg').style.color = "#ff3b30";
+        }
     </script>
 </body>
 </html>
